@@ -1,17 +1,4 @@
-from fastapi import FastAPI,HTTPException
-from pydantic import BaseModel
-app=FastAPI()
-class Student(BaseModel):
-    id: int
-    name: str
-    age: int
-student_DB=[]
-@app.get("/students")
-async def get_students():
-    return student_DB
-
-@app.post("/students")
-async def add_students(student:Stude# --- file: utils/metrics.py ---
+# --- file: utils/metrics.py ---
 """
 Evaluation metrics for PolyVision framework
 """
@@ -98,22 +85,4 @@ class CrossValidationResults:
                 'values': values
             }
             
-        return summarynt):
-    student_DB.append(student.dict())
-    return {"msg": "Student added successfully"}
-
-@app.put("/students/{student_id}")
-async def update(student_id : int , student : Student):
-    for s in student_DB:
-        if s["id"]==student_id:
-            s.update(student.dict())
-            return {"msg":"Student details updated successfully"}
-    raise HTTPException(status_code=404,detail="Student not found")
-
-@app.delete("/students/{student_id}")
-async def delete_student(student_id: int, student : Student):
-     for s in student_DB:
-        if s["id"] == student_id:
-            student_DB.remove(s)
-            return {"msg": "Student deleted"}
-     raise HTTPException(status_code=404, detail="Student not found")
+        return summary
